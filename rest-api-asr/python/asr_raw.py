@@ -11,7 +11,6 @@ if IS_PY3:
     from urllib.request import Request
     from urllib.error import URLError
     from urllib.parse import urlencode
-
     timer = time.perf_counter
 else:
     import urllib2
@@ -30,7 +29,7 @@ API_KEY = 'kVcnfD9iW2XVZSMaLMrtLYIz'
 SECRET_KEY = 'O9o1O213UgG5LFn0bDGNtoRN3VWl2du6'
 
 # 需要识别的文件
-AUDIO_FILE = './audio/16k.pcm'  # 只支持 pcm/wav/amr 格式，极速版额外支持m4a 格式
+AUDIO_FILE = './audio/2019-11-15_14_46_28.wav'  # 只支持 pcm/wav/amr 格式，极速版额外支持m4a 格式
 # 文件格式
 FORMAT = AUDIO_FILE[-3:];  # 文件后缀只支持 pcm/wav/amr 格式，极速版额外支持m4a 格式
 
@@ -40,7 +39,7 @@ RATE = 16000;  # 固定值
 
 # 普通版
 
-DEV_PID = 1536;  # 1537 表示识别普通话，使用输入法模型。1536表示识别普通话，使用搜索模型。根据文档填写PID，选择语言及识别模型
+DEV_PID = 1737;  # 1537 表示识别普通话，使用输入法模型。1536表示识别普通话，使用搜索模型。根据文档填写PID，选择语言及识别模型
 ASR_URL = 'http://vop.baidu.com/server_api'
 SCOPE = 'audio_voice_assistant_get'  # 有此scope表示有asr能力，没有请在网页里勾选，非常旧的应用可能没有
 
@@ -112,6 +111,7 @@ if __name__ == '__main__':
     speech_data = []
     with open(AUDIO_FILE, 'rb') as speech_file:
         speech_data = speech_file.read()
+        print(type(speech_data))
     length = len(speech_data)
     if length == 0:
         raise DemoError('file %s length read 0 bytes' % AUDIO_FILE)
